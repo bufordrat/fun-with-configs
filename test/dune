@@ -1,0 +1,11 @@
+(test
+ (name test_fun_with_configs)
+ (libraries lib))
+
+(env
+ (dev
+  (flags (:standard -warn-error -A))))
+
+; Local Variables:
+; mode: dune
+; End:
