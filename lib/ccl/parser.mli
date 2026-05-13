@@ -14,3 +14,7 @@ val parse : string -> (key_val list, [> error ]) result
 prefix of spaces and considers all keys with this prefix (or less) to be
 top-level. *)
 val parse_value : string -> (key_val list, [> error ]) result
+
+val example_ccl : string
+val spinup : string
+val attc : string

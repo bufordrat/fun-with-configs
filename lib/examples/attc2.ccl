@@ -1,0 +1,54 @@
+= source_type = application/pdf
+  target_type = application/pdf
+  shell_command = /home/teichman/.config/attachment-converter/scripts/soffice-wrapper.sh -i pdf -o pdf
+  id = soffice-pdf-to-pdfa
+
+= source_type = application/pdf
+  target_type = text/plain
+  shell_command = /home/teichman/.config/attachment-converter/scripts/pdftotext-wrapper.sh
+  id = pdftotext-pdf-to-text
+
+= source_type = application/msword
+  target_type = application/pdf
+  shell_command = /home/teichman/.config/attachment-converter/scripts/soffice-wrapper.sh -i doc -o pdf
+  id = soffice-doc-to-pdfa
+
+= source_type = application/msword
+  target_type = text/plain
+  shell_command = /home/teichman/.config/attachment-converter/scripts/soffice-wrapper.sh -i doc -o txt
+  id = soffice-doc-to-txt
+
+= source_type = application/vnd.openxmlformats-officedocument.wordprocessingml.document
+  target_type = application/pdf
+  shell_command = /home/teichman/.config/attachment-converter/scripts/soffice-wrapper.sh -i docx -o pdf
+  id = soffice-doc-to-pdfa
+
+= source_type = application/vnd.openxmlformats-officedocument.wordprocessingml.document
+  target_type = text/plain
+  shell_command = /home/teichman/.config/attachment-converter/scripts/pandoc-wrapper.sh -i docx -o txt
+  id = soffice-doc-to-txt
+
+= source_type = application/vnd.ms-excel
+  target_type = text/tab-separated-values
+  shell_command = /home/teichman/.config/attachment-converter/scripts/ssconvert-wrapper.sh -i xls -o tsv
+  id = ssconvert-xls-to-tsv
+
+= source_type = application/vnd.ms-excel
+  target_type = text/tab-separated-values
+  shell_command = /home/teichman/.config/attachment-converter/scripts/ssconvert-wrapper.sh -i xlsx -o tsv
+  id = ssconvert-xlsx-to-tsv
+
+= source_type = image/gif
+  target_type = image/tiff
+  shell_command = /home/teichman/.config/attachment-converter/scripts/vips-wrapper.sh -i gif -o tif
+  id = vips-gif-to-tif
+
+= source_type = image/bmp
+  target_type = image/tiff
+  shell_command = /home/teichman/.config/attachment-converter/scripts/vips-wrapper.sh -i bmp -o tif
+  id = vips-bmp-to-tif
+
+= source_type = image/jpeg
+  target_type = image/tiff
+  shell_command = /home/teichman/.config/attachment-converter/scripts/vips-wrapper.sh -i jpeg -o tif
+  id = vips-jpg-to-tif

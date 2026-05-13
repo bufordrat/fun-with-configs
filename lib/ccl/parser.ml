@@ -1,5 +1,12 @@
 open Angstrom
 
+module Files = struct
+  let example_ccl = Prelude.readfile "lib/examples/example.ccl"
+  let attc = Prelude.readfile "lib/examples/attc.ccl"
+  let spinup = Prelude.readfile "lib/examples/spinup.ccl"
+end
+include Files
+
 type key_val = {
   key : string;
   value : string;
@@ -89,3 +96,36 @@ let parse_value str =
   match parse_string ~consume:All nested_kvs_p str with
   | Error msg -> Error (`Parse_error msg)
   | Ok v -> Ok v
+
+let parse_one_level' config_str =
+  let open Etude.Result.Make (struct type t = error end) in
+  let* initial = parse config_str in
+  let each_pair { key ; value } =
+    let+ parsed = Prelude.String.join
+                    ~sep:"\n"
+                    (Str.split (Str.regexp "\n  ") value)
+                  |> parse
+    in
+    (key, parsed)
+  in
+  sequence (List.map each_pair initial)
+  (* assert false *)
+
+let parse_one_level config_str =
+  let rec_to_tuple { key ; value } = (key, value) in
+  let each_entry (k, alist) = (k, List.map rec_to_tuple alist) in
+  let initial = parse_one_level' config_str in
+  Result.map (List.map each_entry) initial
+  
+let parse_empty_keys config_str =
+  let open Etude.Result.Make (struct type t = error end) in
+  let* initial = parse config_str in
+  let each_pair { key; value } =
+    let string = Prelude.String.join
+                    ~sep:"\n"
+                    (Str.split (Str.regexp "\n  ") value)
+    in
+    parse string
+  in
+  sequence (List.map each_pair initial)
+
