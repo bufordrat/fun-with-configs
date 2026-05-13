@@ -3,6 +3,7 @@ open Angstrom
 module Files = struct
   let example_ccl = Prelude.readfile "lib/examples/example.ccl"
   let attc = Prelude.readfile "lib/examples/attc.ccl"
+  let attc2 = Prelude.readfile "lib/examples/attc2.ccl"
   let spinup = Prelude.readfile "lib/examples/spinup.ccl"
 end
 include Files
@@ -109,7 +110,6 @@ let parse_one_level' config_str =
     (key, parsed)
   in
   sequence (List.map each_pair initial)
-  (* assert false *)
 
 let parse_one_level config_str =
   let rec_to_tuple { key ; value } = (key, value) in
@@ -128,4 +128,3 @@ let parse_empty_keys config_str =
     parse string
   in
   sequence (List.map each_pair initial)
-
