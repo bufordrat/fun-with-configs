@@ -16,3 +16,10 @@ let parse configstr =
   |> Seq.to_list
   |> List.map (Result.map snd)
   |> sequence
+
+let parse_path filepath =
+  let contents = Prelude.readfile filepath
+  in parse contents
+
+let cat er1 er2 = er1 ^ "\n" ^ er2
+let ast_cat = (@)

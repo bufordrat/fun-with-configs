@@ -16,7 +16,12 @@ top-level. *)
 val parse_value : string -> (key_val list, [> error ]) result
 
 val parse_empty_keys : string -> (key_val list list, error) result
+val parse_path : string -> (key_val list, [> error ]) result
 
 val example_ccl : string
 val spinup : string
 val attc : string
+val attc2 : string
+val cat : string -> string -> string
+val ast_cat : key_val list -> key_val list -> key_val list
+
